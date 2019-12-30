@@ -24,6 +24,9 @@ public class Scene {
 				}
 			}
 		}
+		
+		finalIntersect.bounce(this);
+		
 		return finalIntersect;
 	}
 	
