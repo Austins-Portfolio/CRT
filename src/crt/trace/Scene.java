@@ -12,11 +12,11 @@ public class Scene {
 		Objects.add(object);
 	}
 	
-	public Intersect intersect(Ray ray) {
+	public Intersect intersect(Ray ray,int bounce) {
 		float closestHit = Float.MAX_VALUE;
 		Intersect finalIntersect = null;
 		for(int i = 0; i < Objects.size();i++) {
-			Intersect intersect = Objects.get(i).intersect(ray);
+			Intersect intersect = Objects.get(i).intersect(ray, bounce);
 			if(intersect!=null) {
 				if(closestHit > intersect.distance) {
 					closestHit = intersect.distance;
@@ -25,7 +25,10 @@ public class Scene {
 			}
 		}
 		
-		finalIntersect.bounce(this);
+		
+		if(finalIntersect!=null) {
+			finalIntersect.bounce(this);
+		}
 		
 		return finalIntersect;
 	}

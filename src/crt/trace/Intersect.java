@@ -7,12 +7,12 @@ import crt.objects.materials.Material;
 
 public class Intersect {
 	
-	Ray ray;
-	float distance;
-	Vector3 point,normal;
-	Material material;
-	Intersect intersect;
-	int bounce;
+	public Ray ray;
+	public float distance;
+	public Vector3 point,normal;
+	public Material material;
+	public Intersect intersect;
+	public int bounce;
 	
 	int max_bounce = 0;
 	
@@ -28,10 +28,11 @@ public class Intersect {
 	public void bounce(Scene scene) {
 		if(material.reflective !=0.0 || material.refractive !=0.0) {
 			if(bounce < max_bounce) {
-				intersect = scene.intersect(new Ray(point,ray.dir.reflect(normal)));
+				intersect = scene.intersect(new Ray(point,ray.dir.reflect(normal)), bounce);
 				if(intersect!=null) {
 					intersect.bounce(scene);
 				}
+				bounce++;
 			}
 		}
 	}
