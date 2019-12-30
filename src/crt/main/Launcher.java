@@ -13,8 +13,8 @@ import crt.trace.Tracer;
 
 public class Launcher {
 
-	static int width = 1024;
-	static int height = 1024;
+	static int width = 512;
+	static int height = 512;
 	
 	public static void main(String args[]) {
 		
@@ -27,27 +27,29 @@ public class Launcher {
 		frame.setEnabled(true);
 		
 		Tracer tracer = new Tracer(width, height);
-		Camera camer = new Camera(new Vector3(0, -2, -10));
+		Camera camer = new Camera(new Vector3(0, 0, -10));
 		Scene scene = new Scene();
 		
 		Material redMaterial = new Material(255, 0, 0, 0.1f, 0.1f, 0.1f);
 		Material greenMaterial = new Material(0, 255, 0, 0.1f, 0.1f, 0.1f);
 		Material blueMaterial = new Material(0, 0, 255, 0.1f, 0.1f, 0.1f);
 		
-		Sphere sphere = new Sphere(new Vector3(0, 0f, 3), 1f, greenMaterial);
-		Sphere sphere2 = new Sphere(new Vector3(6, -5f, 4), 3f, blueMaterial);
-		Sphere sphere3 = new Sphere(new Vector3(2, 0f, 3), 1f, redMaterial);
+		Sphere sphere = new Sphere(new Vector3(3, 0f, 0), 1f, greenMaterial);
+		Sphere sphere2 = new Sphere(new Vector3(0, 0f, 0), 3f, blueMaterial);
+		Sphere sphere3 = new Sphere(new Vector3(-3, 0f, 0), 1f, redMaterial);
 		
 		scene.addGeometricObject(sphere);
 		scene.addGeometricObject(sphere2);
 		scene.addGeometricObject(sphere3);
 		
-		Image image = tracer.renderScene(camer, scene);
-		
 		Graphics g = frame.getGraphics();
+		
+		while(true) {
+		Image image = tracer.renderScene(camer, scene);
 		g.drawImage(image, 0, 0, width, height, null);
 		
 		System.out.println("Done!");
+		}
 	}
 	
 }
