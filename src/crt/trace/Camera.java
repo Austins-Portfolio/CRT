@@ -30,12 +30,11 @@ public class Camera {
 		Vector3 forward = getForwardVector();
 		Vector3 up = getUpVector();
 		Vector3 right = getRightVector();
-		right = right.mul(mulX);
-		up = up.mul(mulY);
+		right = right.mul(-mulX);
+		up = up.mul(-mulY);
 		forward = forward.add(pos);
 		right = right.add(up);
 		right = right.add(forward);
-		//Vector3 point = right.mul(mulX).add(up.mul(mulY)).add(pos.add(forward));
 		Vector3 point = right;
 		Vector3 dir = point.sub(pos);
 		dir = dir.normalize();
