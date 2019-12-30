@@ -13,6 +13,11 @@ public class Launcher {
 		System.out.println(vecDotted);
 		Vector3 vecProjected = vec1.scalarProjection(vec2);
 		vecProjected.print();
+		
+		Vector3 vec3 = new Vector3(-1,-1,0);
+		Vector3 vec4 = new Vector3(0,1,0);
+		Vector3 vecReflect = vec3.reflect(vec4);
+		vecReflect.print();
 	}
 	
 }

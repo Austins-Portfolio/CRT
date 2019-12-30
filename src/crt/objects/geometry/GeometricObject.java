@@ -1,7 +1,9 @@
 package crt.objects.geometry;
 
-public class GeometricObject {
+import crt.trace.Intersect;
 
-	
+public abstract class GeometricObject {
+
+	public abstract Intersect intersect(Ray ray);
 	
 }

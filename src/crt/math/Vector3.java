@@ -63,6 +63,10 @@ public class Vector3 {
 		return b.mul(dot(b));
 	}
 	
+	public Vector3 reflect(Vector3 normal) {
+		return new Vector3(this.sub(normal.mul(dot(normal)*2)));
+	}
+	
 	public void print() {
 		System.out.println("Vector3: " + x + "," + y + "," + z);
 	}
