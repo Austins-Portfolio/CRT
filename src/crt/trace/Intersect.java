@@ -37,6 +37,9 @@ public class Intersect {
 	}
 	
 	public ArrayList<Intersect> unpack(ArrayList<Intersect> Intersects) {
+		if(Intersects == null) {
+			Intersects = new ArrayList<Intersect>();
+		}
 		Intersects.add(this);
 		if(intersect!=null) {
 			intersect.unpack(Intersects);

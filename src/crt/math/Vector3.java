@@ -34,8 +34,19 @@ public class Vector3 {
 		return new Vector3(x * f, y * f, z * f);
 	}
 	
+	public Vector3 mul(Quaternion q)
+	{
+		Quaternion q_inv = q.conjugate();
+		Quaternion nQ = q.mul(this).mul(q_inv);
+		return new Vector3(nQ.x, nQ.y, nQ.z);
+	}
+	
 	public Vector3 div(float f) {
 		return new Vector3(x / f, y / f, z / f);
+	}
+	
+	public Vector3 negate() {
+		return new Vector3(-x, -y, -z);
 	}
 	
 	public float mag() {
