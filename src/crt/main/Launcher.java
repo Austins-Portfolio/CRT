@@ -15,6 +15,7 @@ public class Launcher {
 
 	static int width = 512;
 	static int height = 512;
+	static int targetFPS = 10;
 	
 	public static void main(String args[]) {
 		
@@ -26,17 +27,21 @@ public class Launcher {
 		frame.setVisible(true);
 		frame.setEnabled(true);
 		
+		InputController inputController = new InputController();
+		
+		frame.addKeyListener(inputController);
+		
 		Tracer tracer = new Tracer(width, height);
-		Camera camer = new Camera(new Vector3(0, 0, -10));
+		Camera camera = new Camera(new Vector3(3, 0, -10));
 		Scene scene = new Scene();
 		
 		Material redMaterial = new Material(255, 0, 0, 0.1f, 0.1f, 0.1f);
 		Material greenMaterial = new Material(0, 255, 0, 0.1f, 0.1f, 0.1f);
 		Material blueMaterial = new Material(0, 0, 255, 0.1f, 0.1f, 0.1f);
 		
-		Sphere sphere = new Sphere(new Vector3(3, 0f, 0), 1f, greenMaterial);
-		Sphere sphere2 = new Sphere(new Vector3(0, 0f, 0), 3f, blueMaterial);
-		Sphere sphere3 = new Sphere(new Vector3(-3, 0f, 0), 1f, redMaterial);
+		Sphere sphere = new Sphere(new Vector3(9, 0f, 0), 1f, greenMaterial);
+		Sphere sphere2 = new Sphere(new Vector3(6, 0f, 0), 3f, blueMaterial);
+		Sphere sphere3 = new Sphere(new Vector3(3, 0f, 0), 1f, redMaterial);
 		
 		scene.addGeometricObject(sphere);
 		scene.addGeometricObject(sphere2);
@@ -44,11 +49,16 @@ public class Launcher {
 		
 		Graphics g = frame.getGraphics();
 		
-		while(true) {
-		Image image = tracer.renderScene(camer, scene);
-		g.drawImage(image, 0, 0, width, height, null);
+		long startTime = System.currentTimeMillis();
 		
-		System.out.println("Done!");
+		while(true) {
+			long currentTime = System.currentTimeMillis();
+			if(currentTime - startTime >= 1000/targetFPS) {
+				camera.update(inputController);
+				Image image = tracer.renderScene(camera, scene);
+				g.drawImage(image, 0, 0, width, height, null);
+		
+			}
 		}
 	}
 	

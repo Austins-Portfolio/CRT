@@ -20,17 +20,17 @@ public class Quaternion {
 	
 	public Quaternion(float w, Vector3 vec3) {
 		float theta = (float) Math.toRadians(w);
-		this.w = (float) Math.cos(theta/2);
-		this.x = (float) (vec3.x*Math.sin(theta/2));
-		this.y = (float) (vec3.y*Math.sin(theta/2));
-		this.z = (float) (vec3.z*Math.sin(theta/2));
+		this.w = (float) Math.cos(theta/2.0f);
+		this.x = (float) (vec3.x*Math.sin(theta/2.0f));
+		this.y = (float) (vec3.y*Math.sin(theta/2.0f));
+		this.z = (float) (vec3.z*Math.sin(theta/2.0f));
 	}
 	
 	public Quaternion mul(Quaternion q) {
-		float nW = -x * q.x - y * q.y - z * q.z + w * q.w;
-		float nX =  x * q.w + y * q.z - z * y + q.w * x;
-		float nY = -x * q.z + y * q.w + z * q.x + w * q.y;
-		float nZ =  x * q.y - y * q.x + z * q.w + w * q.z;
+		float nW = w * q.w - x * q.x - y * q.y - z * q.z;
+		float nX = w * q.x + x * q.w + y * q.z - z * q.y;
+		float nY = w * q.y - x * q.z + y * q.w + z * q.x;
+		float nZ = w * q.z + x * q.y - y * q.x + z * q.w;
 		return new Quaternion(nW, nX, nY, nZ);
 	}
 	

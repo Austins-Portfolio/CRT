@@ -1,5 +1,8 @@
 package crt.trace;
 
+import com.sun.glass.events.KeyEvent;
+
+import crt.main.InputController;
 import crt.math.Quaternion;
 import crt.math.Vector3;
 import crt.objects.geometry.Ray;
@@ -9,11 +12,55 @@ public class Camera {
 	Vector3 pos;
 	Quaternion rotation;
 	float eye_distance;
+	float move_speed = 0.2f;
+	float rotation_speed = 0.1f;
 	
 	public Camera(Vector3 pos) {
 		this.pos = pos;
 		this.rotation = new Quaternion(0.0f, 0, 0, 1f);
-		this.eye_distance = 1.1f;
+		this.eye_distance = 1.0f;
+	}
+	
+	public void update(InputController inputController) {
+		if(inputController.getKey(KeyEvent.VK_W)) {
+			move(getForwardVector(), move_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_S)) {
+			move(getForwardVector().negate(), move_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_D)) {
+			move(getRightVector().negate(), move_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_A)) {
+			move(getRightVector(), move_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_SPACE)) {
+			move(getUpVector().negate(), move_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_C)) {
+			move(getUpVector(), move_speed);
+		}
+		
+		
+		if(inputController.getKey(KeyEvent.VK_Q)) {
+			rotate(getForwardVector(), rotation_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_E)) {
+			rotate(getForwardVector(), -rotation_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_UP)) {
+			rotate(getRightVector(), rotation_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_DOWN)) {
+			rotate(getRightVector(), -rotation_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_LEFT)) {
+			rotate(getUpVector(), rotation_speed);
+		}
+		if(inputController.getKey(KeyEvent.VK_RIGHT)) {
+			rotate(getUpVector().negate(), rotation_speed);
+		}
+		
 	}
 	
 	public void move(Vector3 dir, float amount) {
@@ -21,7 +68,11 @@ public class Camera {
 	}
 	
 	public void rotate(Vector3 axis, float theta) {
-		rotation = rotation.mul(new Quaternion(theta, axis)).normalize();
+		Quaternion q = new Quaternion(theta, axis);
+		rotation = q.mul(rotation);
+		rotation = rotation.normalize();
+		//rotation.print();
+		getForwardVector().print();
 	}
 	
 	public Ray generateCameraRay(int width, int height, int x, int y) {
