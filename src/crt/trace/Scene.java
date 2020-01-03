@@ -18,7 +18,7 @@ public class Scene {
 		for(int i = 0; i < Objects.size();i++) {
 			Intersect intersect = Objects.get(i).intersect(ray, bounce);
 			if(intersect!=null) {
-				if(closestHit > intersect.distance) {
+				if(closestHit > intersect.distance && intersect.distance > 0) {
 					closestHit = intersect.distance;
 					finalIntersect = intersect;
 				}

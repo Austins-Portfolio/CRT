@@ -75,7 +75,7 @@ public class Vector3 {
 	}
 	
 	public Vector3 reflect(Vector3 normal) {
-		return new Vector3(this.sub(normal.mul(dot(normal)*2)));
+		return this.sub(normal.mul(normal.dot(this)).mul(2f));
 	}
 	
 	public void print() {

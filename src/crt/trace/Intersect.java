@@ -1,6 +1,8 @@
 package crt.trace;
 
 import java.util.ArrayList;
+
+import crt.main.Settings;
 import crt.math.Vector3;
 import crt.objects.geometry.Ray;
 import crt.objects.materials.Material;
@@ -14,7 +16,7 @@ public class Intersect {
 	public Intersect intersect;
 	public int bounce;
 	
-	int max_bounce = 0;
+	int max_bounce = Settings.MAX_BOUNCE;
 	
 	public Intersect(Ray ray, float distance,Vector3 point, Vector3 normal, Material material, int bounce) {
 		this.ray = ray;
@@ -28,7 +30,7 @@ public class Intersect {
 	public void bounce(Scene scene) {
 		if(material.reflective !=0.0 || material.refractive !=0.0) {
 			if(bounce < max_bounce) {
-				intersect = scene.intersect(new Ray(point,ray.dir.reflect(normal)), bounce);
+				intersect = scene.intersect(new Ray(point,ray.dir.reflect(normal)), bounce+=1);
 				if(intersect!=null) {
 					intersect.bounce(scene);
 				}

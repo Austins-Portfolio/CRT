@@ -30,9 +30,9 @@ public class Sphere extends GeometricObject{
 			float t2 = t + x;
 			
 			if(t1 < t2) {
-				return new Intersect(ray, t1, ray.dir.mul(t1), pos.sub(newCenter).normalize(), material, bounce);
+				return new Intersect(ray, t1, ray.pos.add(ray.dir.mul(t1)), ray.pos.add(ray.dir.mul(t1)).sub(pos).normalize(), material, bounce);
 			}else {
-				return new Intersect(ray, t2, ray.dir.mul(t2), pos.sub(newCenter).normalize(), material, bounce);
+				return new Intersect(ray, t2, ray.pos.add(ray.dir.mul(t2)), ray.pos.add(ray.dir.mul(t2)).sub(pos).normalize(), material, bounce);
 			}
 		}
 		

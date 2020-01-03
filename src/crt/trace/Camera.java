@@ -13,7 +13,7 @@ public class Camera {
 	Quaternion rotation;
 	float eye_distance;
 	float move_speed = 0.2f;
-	float rotation_speed = 0.1f;
+	float rotation_speed = 2f;
 	
 	public Camera(Vector3 pos) {
 		this.pos = pos;
@@ -61,6 +61,7 @@ public class Camera {
 			rotate(getUpVector().negate(), rotation_speed);
 		}
 		
+		//pos.print();
 	}
 	
 	public void move(Vector3 dir, float amount) {
@@ -71,8 +72,6 @@ public class Camera {
 		Quaternion q = new Quaternion(theta, axis);
 		rotation = q.mul(rotation);
 		rotation = rotation.normalize();
-		//rotation.print();
-		getForwardVector().print();
 	}
 	
 	public Ray generateCameraRay(int width, int height, int x, int y) {

@@ -19,8 +19,8 @@ public class Tracer {
 		
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				Intersect intersect = scene.intersect(camera.generateCameraRay(width, height, x, y), 0);
-				int color = Shader.genColor(intersect);
+				Intersect intersect = scene.intersect(camera.generateCameraRay(width, height, x, y), 1);
+				int color = Shader.genColorMultiBounce(intersect);
 				image.setRGB(x, y, color);
 			}
 		}
