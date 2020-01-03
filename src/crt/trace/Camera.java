@@ -12,8 +12,8 @@ public class Camera {
 	Vector3 pos;
 	Quaternion rotation;
 	float eye_distance;
-	float move_speed = 0.2f;
-	float rotation_speed = 2f;
+	float move_speed = 1f;
+	float rotation_speed = 10f;
 	
 	public Camera(Vector3 pos) {
 		this.pos = pos;

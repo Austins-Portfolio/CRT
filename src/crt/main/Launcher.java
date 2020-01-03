@@ -37,20 +37,20 @@ public class Launcher {
 		frame.addKeyListener(inputController);
 		
 		Tracer tracer = new Tracer(render_width, render_height);
-		Camera camera = new Camera(new Vector3(6, 6, -10));
+		Camera camera = new Camera(new Vector3(6, 6, -60));
 		Scene scene = new Scene();
 		
 		Material redMaterial = new Material(255, 0, 0, 0.1f, 0f, 0.1f);
 		Material greenMaterial = new Material(0, 255, 0, 0.1f, 0f, 0.1f);
-		Material blueMaterial = new Material(0, 0, 255, 0.1f, 0f, 0.1f);
+		Material blueMaterial = new Material(0, 0, 255, 0.1f, 0.5f, 0.1f);
 		Material whiteMaterial = new Material(255, 255, 255, 0.1f, 0f, 0.1f);
+		Material spaceMirrorMaterial = new Material(0, 0, 0, 0.1f, 1f, 0.1f);
 		
-		Sphere sphere = new Sphere(new Vector3(6, 6, 0), 1f, greenMaterial);
+		Sphere sphere = new Sphere(new Vector3(6, 6, 0), 1f, spaceMirrorMaterial);
 		
 		Plane plane = new Plane(new Vector3(0,0,0), new Vector3(0,1,0), whiteMaterial);
 		Plane plane2 = new Plane(new Vector3(0,0,0), new Vector3(1,0,0), redMaterial);
 		Plane plane3 = new Plane(new Vector3(6*room_size,0,0), new Vector3(1,0,0), greenMaterial);
-		Plane plane4 = new Plane(new Vector3(0,0,6*room_size), new Vector3(0,1,0), whiteMaterial);
 		Plane plane5 = new Plane(new Vector3(0,6*room_size,0), new Vector3(0,1,0), whiteMaterial);
 		Plane plane6 = new Plane(new Vector3(0,0,6*room_size), new Vector3(0,0,1), whiteMaterial);
 		
@@ -59,7 +59,6 @@ public class Launcher {
 		scene.addGeometricObject(plane);
 		scene.addGeometricObject(plane2);
 		scene.addGeometricObject(plane3);
-		scene.addGeometricObject(plane4);
 		scene.addGeometricObject(plane5);
 		scene.addGeometricObject(plane6);
 		
@@ -71,8 +70,10 @@ public class Launcher {
 			long currentTime = System.currentTimeMillis();
 			if(currentTime - startTime >= 1000/targetFPS) {
 				camera.update(inputController);
-				Image image = tracer.renderScene(camera, scene);
+				Image image = tracer.renderScene(camera, scene, Settings.THREAD_SPLIT);
+				g.clearRect(0, 0, width, height);
 				g.drawImage(image, 0, 0, width, height, null);
+				currentTime = System.currentTimeMillis();
 				long fpsTime = currentTime-startTime;
 				int fps = (int) (1000/fpsTime);
 				System.out.println("FPS:"+fps);

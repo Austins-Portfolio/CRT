@@ -72,7 +72,7 @@ public class Shader {
 		return new Color(255,255,255).getRGB();
 	}
 	
-	static float d2 = 6;
+	static float d2 = 10;
 	public static int genColorMultiBounceShadeDistance(Intersect intersect) {
 		if(intersect!=null) {
 			ArrayList<Intersect> intersects = new ArrayList<Intersect>();
@@ -102,7 +102,7 @@ public class Shader {
 			Color color = new Color((int)finalR, (int)finalG, (int)finalB);
 			return color.getRGB();
 		}
-		return new Color(255,255,255).getRGB();
+		return 0;
 	}
 	
 	public static int genColorShadeNormal(Intersect intersect) {
