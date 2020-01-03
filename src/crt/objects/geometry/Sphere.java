@@ -39,10 +39,4 @@ public class Sphere extends GeometricObject{
 		return null;
 	}
 
-	@Override
-	public boolean intersectLight(Ray ray) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
