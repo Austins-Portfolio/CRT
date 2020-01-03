@@ -72,6 +72,39 @@ public class Shader {
 		return new Color(255,255,255).getRGB();
 	}
 	
+	static float d2 = 6;
+	public static int genColorMultiBounceShadeDistance(Intersect intersect) {
+		if(intersect!=null) {
+			ArrayList<Intersect> intersects = new ArrayList<Intersect>();
+			intersect.unpack(intersects);
+			float finalR = 0;
+			float finalG = 0;
+			float finalB = 0;
+			for(int i = (intersects.size()-1);i >= 0;i--) {
+				Intersect myIntersect = intersects.get(i);
+				float r = myIntersect.material.r;
+				float g = myIntersect.material.g;
+				float b = myIntersect.material.b;
+				float ref = myIntersect.material.reflective;
+				r = MathUtils.clamp(r*(1-ref), 0, 255);
+				g = MathUtils.clamp(g*(1-ref), 0, 255);
+				b = MathUtils.clamp(b*(1-ref), 0, 255);
+				float tempR = MathUtils.clamp(finalR*ref, 0, 255);
+				float tempG = MathUtils.clamp(finalG*ref, 0, 255);
+				float tempB = MathUtils.clamp(finalB*ref, 0, 255);
+				finalR = r + tempR;
+				finalG = g + tempG;
+				finalB = b + tempB;
+			}
+			finalR = MathUtils.clamp(finalR/(intersect.distance/d2), 0, 255);
+			finalG = MathUtils.clamp(finalG/(intersect.distance/d2), 0, 255);
+			finalB = MathUtils.clamp(finalB/(intersect.distance/d2), 0, 255);
+			Color color = new Color((int)finalR, (int)finalG, (int)finalB);
+			return color.getRGB();
+		}
+		return new Color(255,255,255).getRGB();
+	}
+	
 	public static int genColorShadeNormal(Intersect intersect) {
 		if(intersect!=null) {
 			float dot = intersect.normal.dot(new Vector3(0,1,0));

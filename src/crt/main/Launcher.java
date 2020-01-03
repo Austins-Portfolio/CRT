@@ -20,6 +20,8 @@ public class Launcher {
 	static int render_height = Settings.DRAW_HEIGHT;
 	static int targetFPS = Settings.TARGET_FPS;
 	
+	static int room_size = 2;
+	
 	public static void main(String args[]) {
 		
 		JFrame frame = new JFrame();
@@ -35,28 +37,31 @@ public class Launcher {
 		frame.addKeyListener(inputController);
 		
 		Tracer tracer = new Tracer(render_width, render_height);
-		Camera camera = new Camera(new Vector3(3, 3, -10));
+		Camera camera = new Camera(new Vector3(6, 6, -10));
 		Scene scene = new Scene();
 		
-		Material redMaterial = new Material(255, 0, 0, 0.1f, 0.1f, 0.1f);
-		Material greenMaterial = new Material(0, 255, 0, 0.1f, 0.5f, 0.1f);
-		Material blueMaterial = new Material(0, 0, 255, 0.1f, 0.7f, 0.1f);
+		Material redMaterial = new Material(255, 0, 0, 0.1f, 0f, 0.1f);
+		Material greenMaterial = new Material(0, 255, 0, 0.1f, 0f, 0.1f);
+		Material blueMaterial = new Material(0, 0, 255, 0.1f, 0f, 0.1f);
+		Material whiteMaterial = new Material(255, 255, 255, 0.1f, 0f, 0.1f);
 		
-		Sphere sphere = new Sphere(new Vector3(6, 9f, 0), 1f, greenMaterial);
-		Sphere sphere5 = new Sphere(new Vector3(6, 3f, 0), 1f, greenMaterial);
-		Sphere sphere4 = new Sphere(new Vector3(9, 9f, 0), 1f, redMaterial);
-		Sphere sphere2 = new Sphere(new Vector3(9, 6f, 0), 3f, blueMaterial);
-		Sphere sphere3 = new Sphere(new Vector3(0, 6f, 0), 1f, redMaterial);
+		Sphere sphere = new Sphere(new Vector3(6, 6, 0), 1f, greenMaterial);
 		
-		Plane plane = new Plane(new Vector3(0,0,0), new Vector3(0,1,0), redMaterial);
+		Plane plane = new Plane(new Vector3(0,0,0), new Vector3(0,1,0), whiteMaterial);
+		Plane plane2 = new Plane(new Vector3(0,0,0), new Vector3(1,0,0), redMaterial);
+		Plane plane3 = new Plane(new Vector3(6*room_size,0,0), new Vector3(1,0,0), greenMaterial);
+		Plane plane4 = new Plane(new Vector3(0,0,6*room_size), new Vector3(0,1,0), whiteMaterial);
+		Plane plane5 = new Plane(new Vector3(0,6*room_size,0), new Vector3(0,1,0), whiteMaterial);
+		Plane plane6 = new Plane(new Vector3(0,0,6*room_size), new Vector3(0,0,1), whiteMaterial);
 		
 		scene.addGeometricObject(sphere);
-		scene.addGeometricObject(sphere2);
-		scene.addGeometricObject(sphere3);
-		scene.addGeometricObject(sphere4);
-		scene.addGeometricObject(sphere5);
 		
 		scene.addGeometricObject(plane);
+		scene.addGeometricObject(plane2);
+		scene.addGeometricObject(plane3);
+		scene.addGeometricObject(plane4);
+		scene.addGeometricObject(plane5);
+		scene.addGeometricObject(plane6);
 		
 		Graphics g = frame.getGraphics();
 		
