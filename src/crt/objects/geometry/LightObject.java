@@ -4,7 +4,7 @@ import crt.math.MathUtils;
 import crt.math.Vector3;
 import crt.trace.Intersect;
 
-public abstract class LightObject {
+public abstract class LightObject{
 
 	public int r,g,b;
 	public Vector3 pos;

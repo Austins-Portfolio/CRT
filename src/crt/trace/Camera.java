@@ -3,6 +3,7 @@ package crt.trace;
 import com.sun.glass.events.KeyEvent;
 
 import crt.main.InputController;
+import crt.main.Settings;
 import crt.math.Quaternion;
 import crt.math.Vector3;
 import crt.objects.geometry.Ray;
@@ -61,7 +62,13 @@ public class Camera {
 			rotate(getUpVector().negate(), rotation_speed);
 		}
 		
-		//pos.print();
+		if(inputController.getKey(KeyEvent.VK_Z)) {
+			Settings.MAX_BOUNCE = Settings.MAX_BOUNCE-1;
+		}
+		if(inputController.getKey(KeyEvent.VK_X)) {
+			Settings.MAX_BOUNCE = Settings.MAX_BOUNCE+1;
+		}
+		
 	}
 	
 	public void move(Vector3 dir, float amount) {
