@@ -68,6 +68,12 @@ public class Camera {
 		if(inputController.getKey(KeyEvent.VK_X)) {
 			Settings.MAX_BOUNCE = Settings.MAX_BOUNCE+1;
 		}
+		if(inputController.getKey(KeyEvent.VK_B)) {
+			Settings.THREAD_SPLIT = Settings.THREAD_SPLIT-1;
+		}
+		if(inputController.getKey(KeyEvent.VK_N)) {
+			Settings.THREAD_SPLIT = Settings.THREAD_SPLIT+1;
+		}
 		
 	}
 	

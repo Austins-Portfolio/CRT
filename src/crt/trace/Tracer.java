@@ -4,15 +4,18 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import crt.main.Settings;
 import crt.shader.Shader;
 
 public class Tracer {
 
 	int width,height;
+	BufferedImage image;
 	
 	public Tracer(int width, int height) {
 		this.width = width;
 		this.height = height;
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	}
 	
 	public Image renderScene(Camera camera, Scene scene) {
@@ -30,7 +33,6 @@ public class Tracer {
 	}
 	
 	public Image renderScene(Camera camera, Scene scene, int split) {
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		
 		ArrayList<Thread> Workers = new ArrayList<Thread>();
 		
@@ -42,11 +44,13 @@ public class Tracer {
 			}
 		}
 		
-		for(int i = 0;i < Workers.size();i++) {
-			try {
-				Workers.get(i).join();
-			}catch(Exception e) {
-				System.err.println(e.getMessage());
+		if(Settings.JOIN_THREADS) {
+			for(int i = 0;i < Workers.size();i++) {
+				try {
+					Workers.get(i).join();
+				}catch(Exception e) {
+					System.err.println(e.getMessage());
+				}
 			}
 		}
 		
