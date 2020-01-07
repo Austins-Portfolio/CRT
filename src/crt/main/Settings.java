@@ -2,6 +2,8 @@ package crt.main;
 
 public class Settings {
 
+	public static String VERSION = "v0.1";
+	
 	public static int MAX_BOUNCE = 2;
 	public static int RENDER_WIDTH = 512;
 	public static int RENDER_HEIGHT = 512;

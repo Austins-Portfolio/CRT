@@ -77,7 +77,7 @@ public class Launcher {
 				long fpsTime = currentTime-startTime;
 				int fps = (int) (1000/fpsTime);
 				System.out.println("FPS:"+fps);
-				frame.setTitle("CTR FPS:" + fps + " Threads:" + Settings.THREAD_SPLIT*Settings.THREAD_SPLIT + " Max_Bounce:" + Settings.MAX_BOUNCE);
+				frame.setTitle("CTR" + Settings.VERSION + " FPS:" + fps + " Threads:" + Settings.THREAD_SPLIT*Settings.THREAD_SPLIT + " Max_Bounce:" + Settings.MAX_BOUNCE);
 				startTime = System.currentTimeMillis();
 			}
 		}
