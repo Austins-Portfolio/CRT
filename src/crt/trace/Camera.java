@@ -1,7 +1,6 @@
 package crt.trace;
 
-import com.sun.glass.events.KeyEvent;
-
+import java.awt.event.KeyEvent;
 import crt.main.InputController;
 import crt.main.Settings;
 import crt.math.Quaternion;
